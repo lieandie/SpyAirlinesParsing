@@ -1,11 +1,10 @@
-from xml.dom.minidom import parse, Document, Element, Text
+from xml.dom.minidom import parse, Element
 import csv
-import copy
 
 if __name__ == '__main__':
     cell_delimiter = ';'
 
-    input_file = parse('../assets/Pointz.xml')
+    input_file = parse('../assets/PointzAggregator-AirlinesData.xml')
     print 'XML loaded'
 
     output_file_user = open('../assets/parsed/PointzAggregator-AirlinesData.xml.user.csv', 'wb')
