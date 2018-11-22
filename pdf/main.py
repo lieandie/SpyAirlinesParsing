@@ -37,3 +37,4 @@ if __name__ == '__main__':
                         row.append(match.group(groupNum))
             output_file_writer.writerow(row)
     output_file.close()
+    input_file.close()
