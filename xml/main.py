@@ -18,9 +18,9 @@ if __name__ == '__main__':
     output_file_activity_writer = csv.writer(output_file_activity, delimiter=cell_delimiter)
     print 'Writers created'
 
-    user_header = ['id', 'first_name', 'last_name', 'id_card']
+    user_header = ['id', 'first_name', 'last_name', 'id_card_link']
     card_header = ['id', 'id_card_link', 'bonus_program', 'number']
-    activity_header = ['id', 'code', 'date', 'departure', 'arrival', 'fare', 'id_card']
+    activity_header = ['id', 'code', 'date', 'departure', 'arrival', 'fare', 'id_card_link']
 
     output_file_user_writer.writerow(user_header)
     output_file_card_writer.writerow(card_header)
