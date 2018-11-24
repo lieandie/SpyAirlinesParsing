@@ -4,12 +4,27 @@ import csv
 if __name__ == '__main__':
     cell_delimiter = ';'
 
-    input_file = parse('../assets/PointzAggregator-AirlinesData.xml')
+    input_file_path = '../assets/PointzAggregator-AirlinesData.xml'
+    user_output_file_path = '../assets/parsed/PointzAggregator-AirlinesData.xml.user.csv'
+    card_output_file_path = '../assets/parsed/PointzAggregator-AirlinesData.xml.card.csv'
+    activity_output_file_path = '../assets/parsed/PointzAggregator-AirlinesData.xml.activity.csv'
+
+    user_header = ['id', 'first_name', 'last_name', 'id_card_link']
+    card_header = ['id', 'id_card_link', 'bonus_program', 'number']
+    activity_header = ['id', 'flight_code', 'date', 'departure', 'arrival', 'fare', 'id_card_link']
+
+    user_current_id = 0
+    card_link_current_id = 0
+    activity_current_id = 0
+    card_current_id = 0
+    current_user_node_num = 1
+
+    input_file = parse(input_file_path)
     print 'XML loaded'
 
-    output_file_user = open('../assets/parsed/PointzAggregator-AirlinesData.xml.user.csv', 'wb')
-    output_file_card = open('../assets/parsed/PointzAggregator-AirlinesData.xml.card.csv', 'wb')
-    output_file_activity = open('../assets/parsed/PointzAggregator-AirlinesData.xml.activity.csv', 'wb')
+    output_file_user = open(user_output_file_path, 'wb')
+    output_file_card = open(card_output_file_path, 'wb')
+    output_file_activity = open(activity_output_file_path, 'wb')
     print 'Files created'
 
     output_file_user_writer = csv.writer(output_file_user, delimiter=cell_delimiter)
@@ -17,21 +32,10 @@ if __name__ == '__main__':
     output_file_activity_writer = csv.writer(output_file_activity, delimiter=cell_delimiter)
     print 'Writers created'
 
-    user_header = ['id', 'first_name', 'last_name', 'id_card_link']
-    card_header = ['id', 'id_card_link', 'bonus_program', 'number']
-    activity_header = ['id', 'code', 'date', 'departure', 'arrival', 'fare', 'id_card_link']
-
     output_file_user_writer.writerow(user_header)
     output_file_card_writer.writerow(card_header)
     output_file_activity_writer.writerow(activity_header)
     print 'Headers written'
-
-    user_current_id = 0
-    card_link_current_id = 0
-    activity_current_id = 0
-    card_current_id = 0
-
-    current_user_node_num = 1
 
     user_nodes = input_file.getElementsByTagName('user')
 
