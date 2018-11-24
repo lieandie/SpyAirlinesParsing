@@ -8,13 +8,14 @@ if __name__ == '__main__':
     input_file_path = '../assets/Skyteam_Timetable.pdf'
     output_file_path = '../assets/Skyteam_Timetable.csv'
 
-    table_row_regex = ur"(\d{2}\s\w{3})\s{2}-\s{2}(\d{2}\s\w{3})([1-7 ]*)(\d{2}:\d{2})(\d{2}:\d{2}(\+1)?)(\w{2}\d*\*?)(.{3})(\d{1,2}H\d{1,2}M)"
+    table_row_regex = ur'(\d{2}\s\w{3})\s{2}-\s{2}(\d{2}\s\w{3})([1-7 ]*)(\d{2}:\d{2})(\d{2}:\d{2}(\+1)?)(\w{2}\d*)(?:\*?)(.{3})(\d{1,2}H\d{1,2}M)'
 
     start_page_num = 4
     end_page_num = 27514
+    current_flight_idx = 0
 
-    nested_regex_group_numbers = {6}
-    header = ["validity_from", "validity_to", "days", "departure_time", "arrival_time", "flight", "aircraft", "travel_time"]
+    ignored_regex_group_numbers = {6}
+    header = ['id', 'validity_from', 'validity_to', 'days', 'departure_time', 'arrival_time', 'flight', 'aircraft', 'travel_time']
 
     input_file = open(input_file_path, 'rb')
     output_file = open(output_file_path, 'wb')
@@ -34,10 +35,10 @@ if __name__ == '__main__':
         matches = re.finditer(table_row_regex, page.extractText(), re.MULTILINE)
         for matchNum, match in enumerate(matches):
             matchNum = matchNum + 1
-            row = []
+            row = [current_flight_idx]
             for groupNum in range(0, len(match.groups())):
                 groupNum = groupNum + 1
-                if groupNum not in nested_regex_group_numbers:
+                if groupNum not in ignored_regex_group_numbers:
                     groupString = match.group(groupNum)
                     if groupString:
                         row.append(match.group(groupNum))
