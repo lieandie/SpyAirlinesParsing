@@ -14,7 +14,7 @@ if __name__ == '__main__':
     end_page_num = 27514
 
     nested_regex_group_numbers = {6}
-    header = ["validity_from", "validity_to", "days", "dep_time", "arr_time", "flight", "aircraft", "travel_time"]
+    header = ["validity_from", "validity_to", "days", "departure_time", "arrival_time", "flight", "aircraft", "travel_time"]
 
     input_file = open(input_file_path, 'rb')
     output_file = open(output_file_path, 'wb')
